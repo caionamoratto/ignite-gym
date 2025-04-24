@@ -3,8 +3,12 @@ import {useFonts, Roboto_400Regular, Roboto_700Bold} from "@expo-google-fonts/ro
 
 import {GluestackUIProvider} from "@gluestack-ui/themed";
 import { config } from "../config/gluestack-ui.config";
+
+import { Routes } from "@routes/index";
 import { Loading } from "@components/Loading";
-import { SignIn } from "@screens/Signin";
+import { AppRoutes } from "@routes/app.routes";
+
+
 
 export default function App(){
   const [fontsLoaded] = useFonts({Roboto_400Regular, Roboto_700Bold});
@@ -16,7 +20,7 @@ export default function App(){
             backgroundColor="transparent"
             translucent
           />
-        {fontsLoaded? <SignIn/> : <Loading/>}
+        {fontsLoaded? <AppRoutes/> : <Loading/>}
     </GluestackUIProvider>
   );  
 }

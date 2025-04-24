@@ -8,12 +8,11 @@ import Logo from "@assets/logo.svg"
 import { Input } from "@components/Input"
 import { Button } from "@components/Button"
 
-export function SignIn(){
+export function SignUp(){
     const navigator = useNavigation<AuthNavigatorRoutesProps>();
 
-
-    function handleNewAccount(){
-        navigator.navigate("signUp");
+    function handleGoBack(){
+        navigator.navigate("signIn");
     }
 
     return(
@@ -38,20 +37,19 @@ export function SignIn(){
                             Treine sua mente e o seu corpo.
                         </Text>
                     </Center>
-                    <Center gap="$2">
-                        <Heading color="$gray100">Acesse a conta</Heading>
+                    <Center gap="$2" flex={1}>
+                        <Heading color="$gray100">Crie sua conta</Heading>
+                        <Input placeholder="Nome"/>
                         <Input 
                             placeholder="E-mail" 
                             keyboardType="email-address" 
                             autoCapitalize="none"
                         />
                         <Input placeholder="Senha" secureTextEntry/>
-                        <Button title="Acessar" />
+                        <Input placeholder="Confirme a Senha" secureTextEntry/>
+                        <Button title="Criar e acessar" />
                     </Center>
-                    <Center flex={1} justifyContent="flex-end" mt="$4">
-                        <Text color="$gray100" fontSize="$sm" mb="$3" fontFamily="$body">Ainda não tem acesso?</Text>
-                        <Button title="Criar Conta" variant="outline" onPress={handleNewAccount}/>
-                    </Center>
+                    <Button title="Voltar para o login" variant="outline" mt="$12" onPress={handleGoBack}/>
                 </VStack>
             </VStack>
         </ScrollView>
