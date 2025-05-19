@@ -19,7 +19,7 @@ export function AuthRoutes(){
             flex={1}
             position="absolute"
             w="$full"
-            h="105%"
+            h="107%"
         >
             <Navigator screenOptions={{headerShown: false}}>
                 <Screen

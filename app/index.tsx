@@ -6,7 +6,6 @@ import { config } from "../config/gluestack-ui.config";
 
 import { Routes } from "@routes/index";
 import { Loading } from "@components/Loading";
-import { AppRoutes } from "@routes/app.routes";
 
 
 
@@ -20,7 +19,7 @@ export default function App(){
             backgroundColor="transparent"
             translucent
           />
-        {fontsLoaded? <AppRoutes/> : <Loading/>}
+        {fontsLoaded? <Routes/> : <Loading/>}
     </GluestackUIProvider>
   );  
 }

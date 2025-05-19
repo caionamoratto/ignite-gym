@@ -34,7 +34,7 @@ export function AppRoutes(){
             flex={1}
             position="absolute"
             w="$full"
-            h="105%"
+            h="107%"
             bg="$gray700"
         >
             <Navigator 
@@ -47,8 +47,8 @@ export function AppRoutes(){
                         backgroundColor: tokens.colors.gray600,
                         borderTopWidth: 0,
                         height: Platform.OS === "android" ? "auto" : 96,
-                        paddingBottom: tokens.space["12"],
-                        paddingTop: tokens.space["4"],
+                        paddingBottom: tokens.space["14"],
+                        paddingTop: tokens.space["2"],
                         paddingLeft: tokens.space["16"]
                     }
                 }}
