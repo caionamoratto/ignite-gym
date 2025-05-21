@@ -1,10 +1,11 @@
-import { Center, Heading, Image, Text, VStack, ScrollView } from "@gluestack-ui/themed"
+import { Center, Heading, Image, Text, VStack, ScrollView, useToast } from "@gluestack-ui/themed"
 import { useNavigation } from "@react-navigation/native"
-import { useState } from "react"
+
 import { useForm, Controller } from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
 import * as yup from "yup"
 
+import { api } from "@services/api"
 
 import BackgroundImg from "@assets/background.png"
 import Logo from "@assets/logo.svg"
@@ -12,6 +13,8 @@ import Logo from "@assets/logo.svg"
 import type { AuthNavigatorRoutesProps } from "@routes/auth.routes"
 import { Input } from "@components/Input"
 import { Button } from "@components/Button"
+import { AppError } from "@utils/AppError"
+import { ToastMessage } from "@components/ToastMessage"
 
 type FormDataProps = {
     name: string;
@@ -31,6 +34,8 @@ const signUpSchema = yup.object({
 });
 
 export function SignUp(){
+
+    const toast = useToast();
     
     const { control, handleSubmit, formState: {errors} } = useForm<FormDataProps>({
         resolver: yupResolver(signUpSchema)
@@ -43,16 +48,24 @@ export function SignUp(){
     }
 
     async function handleSignUp({name, email, password}: FormDataProps){
-        await fetch("http://192.168.1.5:3333/users", {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({name, email, password})
-        })
-        .then(response => response.json())
-        .then(data => console.log(data));
+        try {
+            const response = await api.post('/users', {name, email, password}); //definida baseURL no api.ts utilizando o axios.
+            console.log(response.data);          
+        } catch (error) {
+            const isAppError = error instanceof AppError;
+            toast.show({
+                placement:"top",
+                render: ({ id }) => (
+                    <ToastMessage 
+                        id={id} 
+                        action="error"
+                        title= {isAppError ? error.message : "Não foi possivel criar a conta. Tente novamente mais tarde."}
+                        onClose={() => toast.close(id)}
+                    />
+                ),
+            });
+        }
+        
     }
 
     return(
